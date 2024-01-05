@@ -1,6 +1,5 @@
 # Flappy-Bird-Clone-CMPT-1267
-
-## Flappy Bird inspired infinite scrolling game
+### Flappy Bird inspired infinite scrolling game
 
 ## Controls
 ### Space - Fly
