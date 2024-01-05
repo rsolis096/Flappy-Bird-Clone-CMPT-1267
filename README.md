@@ -1,10 +1,10 @@
 # Flappy-Bird-Clone-CMPT-1267
 
-##Flappy Bird inspired infinite scrolling game
+## Flappy Bird inspired infinite scrolling game
 
-##Controls
-###Space - Fly
-###Other controls given by on screen prompts
+## Controls
+### Space - Fly
+### Other controls given by on screen prompts
 
 Built using visual Studio
 
