@@ -27,7 +27,7 @@ public:
 	void LoadData();
 	void UnloadData();
 	void restartGame();
-	float deltaTime;
+	static float deltaTime;
 
 private:
 	void ProcessInput();

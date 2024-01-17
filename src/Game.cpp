@@ -6,6 +6,8 @@
 #include "Img.h"
 #include "SoundEffect.h"
 
+float Game::deltaTime = 0.0f;
+float timeSpacePressed = 0.0f;
 
 Game::Game()
 {
@@ -153,6 +155,7 @@ void Game::RunLoop()
 void Game::ProcessInput()
 {
 	SDL_Event event;
+	bool isSpacePressed = false;
 	while (SDL_PollEvent(&event))
 	{
 		switch (event.type)
@@ -165,18 +168,27 @@ void Game::ProcessInput()
 	}
 	// Get state of keyboard
 	const Uint8* state = SDL_GetKeyboardState(NULL);
+
 	// If escape is pressed, also end loop
 	if (state[SDL_SCANCODE_ESCAPE])
 	{
 		mIsRunning = false;
 	}
+
 	//Used to exit the start screen and play flap noise when space is pressed
+
 	if (state[SDL_SCANCODE_SPACE])
 	{
-		gameStart = true;
-		mSpeed = 2;
-		flapSound->playSound();
+		cout << SDL_GetTicks() - timeSpacePressed << endl;
 
+		if (SDL_GetTicks() - timeSpacePressed > 200) //Prevents holding down the space and flying like a rocket
+		{
+			timeSpacePressed = SDL_GetTicks();
+			gameStart = true;
+			mSpeed = 2;
+			flapSound->playSound();
+			player1->Jump();
+		}
 	}
 
 	if (state[SDL_SCANCODE_R])
@@ -185,17 +197,15 @@ void Game::ProcessInput()
 			restart = true;
 	}
 	
-	//Get Player Input
-	player1->getInput(state);
+
 }
 
 void Game::UpdateGame()
 {
 	// Wait until 16ms has elapsed since last frame
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16));
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16)); //SDL DELAY hurt performance, this is best solution for 60fps lock
 
-	// Delta time is the difference in ticks from last frame
-	// (converted to seconds)
+	// Delta time is the difference in ticks from last frame (converted to seconds)
 	deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
 
 	// Clamp maximum delta time value

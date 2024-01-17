@@ -8,6 +8,7 @@ public:
 	~Text();
 	void drawText(SDL_Renderer*, TTF_Font*);
 	void updateText(string);
+	bool textChanged;
 
 protected:
 	SDL_Color textColor;
@@ -35,6 +36,7 @@ Text::Text(TTF_Font* theFont, string tx, int x, int y, int w, int h, Uint8 r, Ui
 	outLineSurface = nullptr;
 	textSurface = nullptr;
 	outLineBox = { x-2, y-1 ,w + 10,h + 10 };
+	textChanged = true;
 
 }
 Text::~Text()
@@ -49,25 +51,25 @@ Text::~Text()
 
 void Text::drawText(SDL_Renderer* mRenderer, TTF_Font* theFont)
 {
-	
-	//For the main Text
-	textSurface = TTF_RenderText_Solid(theFont, textureText.c_str(), textColor);
-	newTexture = SDL_CreateTextureFromSurface(mRenderer, textSurface);
+	if (textChanged)
+	{
 
-	//For the outline of the text
-	//SDL_DestroyTexture(outLineTexture);
-	//outLineSurface = TTF_RenderText_Solid(theFont, textureText.c_str(), outlineColor);
-	//outLineTexture = SDL_CreateTextureFromSurface(mRenderer, outLineSurface);
+		if (newTexture != nullptr)
+			SDL_DestroyTexture(newTexture);
 
-	//SDL_RenderCopy(mRenderer, outLineTexture, NULL, &outLineBox);
+		textSurface = TTF_RenderText_Solid(theFont, textureText.c_str(), textColor);
+		newTexture = SDL_CreateTextureFromSurface(mRenderer, textSurface);
+
+		textChanged = false;
+
+		SDL_FreeSurface(textSurface);
+	}
+
 	SDL_RenderCopy(mRenderer, newTexture, NULL, &textBox);
-		
-	SDL_DestroyTexture(newTexture);//Destroy the previous text texture
-	SDL_FreeSurface(textSurface);
-	
 }
 
 void Text::updateText(string t)
 {
+	textChanged = true;
 	textureText = t;
 }

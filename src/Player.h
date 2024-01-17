@@ -9,7 +9,7 @@ class Player
 	public:
 		Player(const char*, int, int);
 		~Player();//override
-		void getInput(const Uint8*);
+		void Jump();
 		void UpdateActor(float);
 		void drawActor(SDL_Renderer*, int);
 		void loadTexture(SDL_Renderer*);
@@ -30,19 +30,15 @@ protected:
 		Vector2 actorPosition;
 		SDL_Rect hitBox;
 
-
 		//Attributes
 		float actorHeight;
 		float actorWidth;
 		const char* fileName;
-		bool isJumping;
 		bool isFalling;
 
 
 		//Movement Related
-		Vector2 delta;
-		float jumpPower;
-		int movementMultiplier;		
+		float velocity;
 		float hoverSpeed;
 
 		//Texture Related

@@ -4,8 +4,6 @@ const float gravity = 0.45;
 
 Player::Player(const char* fN, int x, int y)
 {
-
-
 	//Position Related
 	actorPosition.x = 100.0f;
 	actorPosition.y = 500;
@@ -15,10 +13,8 @@ Player::Player(const char* fN, int x, int y)
 	rotation = 0.0;
 
 	//Movement Related
-	jumpPower = 0;
 	hoverSpeed = 0.1;
-	movementMultiplier = 0;
-	delta = { 0.0f, 0.0f };
+	velocity = 0.0f;
 
 	//Texture Related
 	fileName = fN;
@@ -29,59 +25,39 @@ Player::Player(const char* fN, int x, int y)
 
 	//Bool
 	isAlive = true;
-	isJumping = false;
 	isFalling = false;
 	allowRotation = true;
 }
 
-void Player::getInput(const Uint8* state)
+void Player::Jump()
 {
-	if (state[SDL_SCANCODE_SPACE] && isAlive == true)
-	{
-		if (delta.y > -7)
-		{
-			isJumping = true;
-			delta.y += -1.5f; //This delta represents the amount of jumping ability the player has.
-		}
-	}		
+	isFalling = true;
+	if (velocity > 0)
+		velocity = -40.0f;
+	else
+		velocity += -40.0f;
 }
 
 //update positon of player
 void Player::UpdateActor(float deltaTime)
-{
+{	
 
-	if (isJumping == true)
+	//Gravity
+	if(isFalling == true)
 	{
-		//The player moves upwards, simulating a jump
-		delta.y += gravity;//Gravity is pushing the jump downwards
-		actorPosition.y += delta.y;
-		//When the player reaches the peak of the jump, begin fall.
-		if (delta.y == 0)
-		{
-			isJumping == false;
-			isFalling = true;
-		}
+		//ACTOR POSITION 0.0f = top of screen, increase this value to "fall".
+
+		//Update position in terms of meters
+		actorPosition.y += velocity * (Game::deltaTime) * 10.0f;
+
+		//Adjust velocity based on impact of gravity
+		velocity += 9.81f * Game::deltaTime * 10.0f;
 	}
 
-	if (isFalling == true)
-	{
-		//Rate of falling
-		jumpPower = 0;
-		delta.y += gravity/3; //Make the rhs larger, player falls faster
-		actorPosition.y += delta.y;
-	}
-
-	//Idle position, used at start of game
-	if (isFalling == false && isJumping == false)
-	{
-		jumpPower = 0;
-		delta.y = 0;
-	}
 	//Prevent player from falling through the floor
 	if (static_cast<int>(actorPosition.y + actorHeight / 2) >= 956)
 	{
 		actorPosition.y = 956 - actorHeight / 2;
-		isJumping = false;
 		isFalling = false;
 		allowRotation = false;
 	}
@@ -89,8 +65,7 @@ void Player::UpdateActor(float deltaTime)
 	if (static_cast<int>(actorPosition.y) <= 0)
 	{
 		actorPosition.y = actorHeight/2;
-		jumpPower = 0; delta.y = 3;
-		isFalling = true, isJumping = false;
+		isFalling = true ;
 	}
 
 }
@@ -187,7 +162,6 @@ void Player::restartGame()
 	actorPosition.y = 500;
 	rotation = 0;
 	isAlive = true;
-	isJumping = false;
 	isFalling = false;
 	allowRotation = true;
 
