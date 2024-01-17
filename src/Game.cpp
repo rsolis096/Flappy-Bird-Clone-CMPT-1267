@@ -181,7 +181,7 @@ void Game::ProcessInput()
 	{
 		cout << SDL_GetTicks() - timeSpacePressed << endl;
 
-		if (SDL_GetTicks() - timeSpacePressed > 200) //Prevents holding down the space and flying like a rocket
+		if (SDL_GetTicks() - timeSpacePressed > 300) //Prevents holding down the space and flying like a rocket
 		{
 			timeSpacePressed = SDL_GetTicks();
 			gameStart = true;
