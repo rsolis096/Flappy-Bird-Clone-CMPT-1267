@@ -1,13 +1,14 @@
 #pragma once
 #include "Game.h"
+#include <string>
 
 class Text
 {
 public:
-	Text(TTF_Font*, string, int, int, int, int, Uint8, Uint8, Uint8);
+	Text(TTF_Font*, std::string, float, float , float, float, Uint8, Uint8, Uint8);
 	~Text();
 	void drawText(SDL_Renderer*, TTF_Font*);
-	void updateText(string);
+	void updateText(std::string);
 	bool textChanged;
 
 protected:
@@ -19,10 +20,10 @@ protected:
 	SDL_Surface* outLineSurface;
 	SDL_Texture* newTexture;
 	SDL_Texture* outLineTexture;
-	string textureText;
+	std::string textureText;
 };
 
-Text::Text(TTF_Font* theFont, string tx, int x, int y, int w, int h, Uint8 r, Uint8 g, Uint8 b)
+inline Text::Text(TTF_Font* theFont, std::string tx, float x, float y, float w, float h, Uint8 r, Uint8 g, Uint8 b)
 {
 	textColor = { r, g, b };
 	outlineColor = {0,0,0};
@@ -35,11 +36,11 @@ Text::Text(TTF_Font* theFont, string tx, int x, int y, int w, int h, Uint8 r, Ui
 	outLineTexture = nullptr;
 	outLineSurface = nullptr;
 	textSurface = nullptr;
-	outLineBox = { x-2, y-1 ,w + 10,h + 10 };
+	outLineBox = { static_cast<int>(x)-2, static_cast<int>(y) - 1 ,static_cast<int>(w) + 25 ,static_cast<int>(h) + 25};
 	textChanged = true;
 
 }
-Text::~Text()
+inline Text::~Text()
 {
 	SDL_DestroyTexture (newTexture);
 	SDL_DestroyTexture (outLineTexture);
@@ -49,7 +50,7 @@ Text::~Text()
 	outLineTexture = nullptr;
 }
 
-void Text::drawText(SDL_Renderer* mRenderer, TTF_Font* theFont)
+inline void Text::drawText(SDL_Renderer* mRenderer, TTF_Font* theFont)
 {
 	if (textChanged)
 	{
@@ -68,7 +69,7 @@ void Text::drawText(SDL_Renderer* mRenderer, TTF_Font* theFont)
 	SDL_RenderCopy(mRenderer, newTexture, NULL, &textBox);
 }
 
-void Text::updateText(string t)
+inline void Text::updateText(std::string t)
 {
 	textChanged = true;
 	textureText = t;
