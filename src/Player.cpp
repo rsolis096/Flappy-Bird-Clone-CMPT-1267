@@ -1,23 +1,20 @@
 #include "Player.h"
 
-#include <stdexcept>
-
 const float gravity = 0.45;
 
-Player::Player(const char* fN, float x, float y)
+Player::Player(const char* fN, int x, int y)
 {
 	//Position Related
 	actorPosition.x = 100.0f;
 	actorPosition.y = 500;
-	actorHeight = x;
-	actorWidth = y;
-	playerSprite = { static_cast<int>(actorPosition.x), static_cast<int>(actorPosition.y), static_cast<int>(actorWidth), static_cast<int>(actorHeight) };
-	hitBox = { static_cast<int>(actorPosition.x), static_cast<int>(actorPosition.y), static_cast<int>(actorWidth)-25, static_cast<int>(actorHeight)-25 };
+	actorHeight = static_cast<int>(x);
+	actorWidth = static_cast<int>(y);
+	hitBox = { static_cast<int>(actorPosition.x), static_cast<int>(actorPosition.y), static_cast<int>(actorWidth), static_cast<int>(actorHeight) };
 	rotation = 0.0;
 
 	//Movement Related
 	hoverSpeed = 0.1;
-	fallVelocity = 0.0f;
+	velocity = 0.0f;
 
 	//Texture Related
 	fileName = fN;
@@ -35,11 +32,10 @@ Player::Player(const char* fN, float x, float y)
 void Player::Jump()
 {
 	isFalling = true;
-	rotation -= 25; //Used for the climbing effect when flapping
-	if (fallVelocity > 0)
-		fallVelocity = -40.0f;
+	if (velocity > 0)
+		velocity = -40.0f;
 	else
-		fallVelocity += -40.0f;
+		velocity += -40.0f;
 }
 
 //update positon of player
@@ -52,21 +48,10 @@ void Player::UpdateActor(float deltaTime)
 		//ACTOR POSITION 0.0f = top of screen, increase this value to "fall".
 
 		//Update position in terms of meters
-		actorPosition.y += fallVelocity * (Game::deltaTime) * 10.0f;
+		actorPosition.y += velocity * (Game::deltaTime) * 10.0f;
 
-		if (actorPosition.y > 850)
-			actorPosition.y = 850;
-
-		//Adjust fallVelocity based on impact of gravity
-		fallVelocity += 9.81f * Game::deltaTime * 10.0f;
-
-		if(rotation < 0)
-		{
-			//Used for the climbing effect when flapping
-			rotation += 1;
-			if (rotation > 0)
-				rotation = 0;
-		}
+		//Adjust velocity based on impact of gravity
+		velocity += 9.81f * Game::deltaTime * 10.0f;
 	}
 
 	//Prevent player from falling through the floor
@@ -98,17 +83,15 @@ void Player::drawActor(SDL_Renderer* mRenderer, int index)
 		index = 0; //This stops the wings from flapping after death
 	}
 
-	//Updates the players position (it's sprite)
-	playerSprite.x = static_cast<int>(actorPosition.x);
-	playerSprite.y = static_cast<int>(actorPosition.y - actorHeight / 2);
 
-	//Collision hitbox
-	hitBox.x = static_cast<int>(actorPosition.x + actorWidth / 4);
-	hitBox.y = static_cast<int>(actorPosition.y - actorHeight / 2.5);
 
-	//Show hitbox for debugging
+	//Updates the players position
+	hitBox.x = static_cast<int>(actorPosition.x);
+	hitBox.y = static_cast<int>(actorPosition.y - actorHeight / 2);
+
+	//Show hitbox for debugging	
 	//SDL_RenderDrawRect(mRenderer, &hitBox);
-	SDL_RenderCopyEx(mRenderer, sprite[index], NULL, &playerSprite, rotation, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(mRenderer, sprite[index], NULL, &hitBox, rotation, NULL, SDL_FLIP_NONE);
 }
 
 void Player::loadTexture(SDL_Renderer* mRenderer)
@@ -124,7 +107,7 @@ void Player::loadTexture(SDL_Renderer* mRenderer)
 		sprite[0] = SDL_CreateTextureFromSurface(mRenderer, spriteSurface[0]);
 		sprite[1] = SDL_CreateTextureFromSurface(mRenderer, spriteSurface[1]);
 		if (spriteSurface[0] == nullptr || spriteSurface[1] == nullptr)
-			throw std::runtime_error(SDL_GetError());
+			throw runtime_error(SDL_GetError());
 	}
 	SDL_FreeSurface(spriteSurface[0]);
 	SDL_FreeSurface(spriteSurface[1]);
@@ -155,7 +138,11 @@ int Player::getHeight()
 	return actorHeight;
 }
 
-
+//Returns the hitbox for collision detection
+SDL_Rect Player::getHitBox()
+{
+	return hitBox;
+}
 
 //Returns the current x position of the actor
 int Player::getPositionX()
@@ -166,13 +153,7 @@ int Player::getPositionX()
 //Returns the current y position of the actor
 int Player::getPositionY()
 {
-	return playerSprite.y;
-}
-
-//Returns the hitbox for collision detection
-SDL_Rect Player::getHitBox()
-{
-	return hitBox;
+	return hitBox.y;
 }
 
 void Player::restartGame()

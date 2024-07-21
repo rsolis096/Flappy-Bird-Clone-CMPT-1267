@@ -3,7 +3,6 @@
 #include <random>
 #include "Game.h"
 
-
 struct Level
 {
 	Level(SDL_Renderer*);
@@ -14,11 +13,11 @@ struct Level
 	SDL_Texture* bottomObjectTexture;
 	SDL_Surface* bottomObjectSurface;
 
-	std::vector<SDL_Rect> topObjects;
-	std::vector<SDL_Rect> bottomObjects;
-	std::vector<SDL_Rect> pointObject;
+	vector<SDL_Rect> topObjects;
+	vector<SDL_Rect> bottomObjects;
+	vector<SDL_Rect> pointObject;
 
-	std::vector<int> diff{ -150, -100, -50,50, 100, 150, -100, -150, -200};
+	vector<int> diff{ -150, -100, -50,50, 100, 150, -100, -150, -200};
 	int diffIndex;
 
 	void drawLevel(SDL_Renderer*);
@@ -28,17 +27,17 @@ struct Level
 
 };
 
-//Returns a true random value
-inline int Level::getRandom(int start, int end)
+int Level::getRandom(int start, int end)
 {
 	std::random_device myEngine;
 	std::uniform_real_distribution<double> randomVal(start, end);
-	int toReturn = static_cast<int>(randomVal(myEngine));
+		int toReturn = static_cast<int>(randomVal(myEngine));
+		//cout << toReturn << endl;
 	return toReturn;
 }
 
 
-inline Level::Level(SDL_Renderer* mRenderer) : diffIndex(0)
+Level::Level(SDL_Renderer* mRenderer) : diffIndex(0)
 {
 	//Set of objects		{x,y,w,h}
 	topObjects.push_back({ 600,-500,150,900 }); //Top
@@ -57,9 +56,10 @@ inline Level::Level(SDL_Renderer* mRenderer) : diffIndex(0)
 	bottomObjectSurface = IMG_Load("Assets/textures/pipeBottom.png");
 	bottomObjectTexture = SDL_CreateTextureFromSurface(mRenderer, bottomObjectSurface);
 	SDL_FreeSurface(bottomObjectSurface);
+
 }
 
-inline void Level::drawLevel(SDL_Renderer* mRenderer)
+void Level::drawLevel(SDL_Renderer* mRenderer)
 {
 	diffIndex = getRandom(0, 8);
 	//Render pipes with opening facing downwards, moves them based on random diff
@@ -93,9 +93,8 @@ inline void Level::drawLevel(SDL_Renderer* mRenderer)
 	pointObject[1].x = topObjects[1].x + topObjects[0].w/2;		
 }
 
-inline void Level::updatePosition(int offset)
+void Level::updatePosition(int offset)
 {
-	
 	for (SDL_Rect& object : topObjects)
 		object.x -= offset;
 	for (SDL_Rect& object : bottomObjects)
@@ -103,7 +102,7 @@ inline void Level::updatePosition(int offset)
 
 }
 
-inline Level::~Level()
+Level::~Level()
 {
 	SDL_DestroyTexture(topObjectTexture);
 	SDL_DestroyTexture(bottomObjectTexture);
@@ -116,7 +115,7 @@ inline Level::~Level()
 	bottomObjectSurface = nullptr;
 }
 
-inline void Level::restartGame()
+void Level::restartGame()
 {
 	//Resets positions back to start
 	topObjects[0] = {600,-500,150,900}; 

@@ -9,9 +9,6 @@
 float Game::deltaTime = 0.0f;
 float timeSpacePressed = 0.0f;
 
-int Game::SCREEN_Y = 960;
-int Game::SCREEN_X = 544;
-
 Game::Game()
 {
 	index = 0;
@@ -60,8 +57,8 @@ bool Game::Initialize()
 		"Flappy Bird", // Window title
 		100,	// Top left x-coordinate of window
 		100,	// Top left y-coordinate of window
-		SCREEN_X,	// Width of window
-		SCREEN_Y,	// Height of window
+		1024,	// Width of window
+		1024,	// Height of window
 		0		// Flags (0 for no flags set)
 	);
 
@@ -106,16 +103,16 @@ bool Game::Initialize()
 
 void Game::LoadData()
 {
-	player1 = new Player("Assets/textures/frame-1.png", 80, 80);
+	player1 = new Player("Assets/textures/frame-1.png", 60, 60);
 	player1->loadTexture(mRenderer);
 
 	theFont = TTF_OpenFont("Assets/font/SuperMario256.ttf", 512);
 
-	scoreText = new Text(theFont, " ", 5, 20,SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
-	hScoreText = new Text(theFont, "Best: 0", SCREEN_X*0.75, 20, SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
-	startTextHeader = new Text(theFont, "FLAPPY BIRD", SCREEN_X * 0.15, SCREEN_Y * 0.4, SCREEN_X * 0.7, SCREEN_Y * 0.1, 255, 255, 255);
-	startTextSub = new Text(theFont, "PRESS SPACE TO START", SCREEN_X * 0.05, SCREEN_Y * 0.5, SCREEN_X * 0.9, SCREEN_Y * 0.1, 255, 255, 255);
-	restartText = new Text(theFont, "Press R To Restart", SCREEN_X * 0.2, SCREEN_Y * 0.8, SCREEN_X * 0.6, SCREEN_Y * 0.05, 255, 255, 255);
+	scoreText = new Text(theFont, " ", 5, 20,200, 70, 255, 255, 255);
+	hScoreText = new Text(theFont, "Best: 0", 750, 20, 200, 70, 255, 255, 255);
+	startTextHeader = new Text(theFont, "FLAPPY BIRD", 250, 450, 500, 100, 255, 255, 255);
+	startTextSub = new Text(theFont, "PRESS SPACE TO START", 60, 550, 900, 100, 255, 255, 255);
+	restartText = new Text(theFont, "Press R To Restart", 275, 750, 500, 75, 255, 255, 255);
 	mText.emplace_back(scoreText);
 	mText.emplace_back(hScoreText);
 	tempText.emplace_back(startTextHeader);
@@ -127,7 +124,7 @@ void Game::LoadData()
 	mainBG->loadBackground(mRenderer, 1);
 
 	lvl = new Level(mRenderer);
-	deathScreen = new IMG("Assets/textures/death.png", 0, 400, SCREEN_X, SCREEN_Y * 0.30);
+	deathScreen = new IMG("Assets/textures/death.png", 0, 400, 1024, 400);
 
 	pointSound = new SoundEffect("Assets/sounds/point.wav", 1, 0, 5);
 	deathSound = new SoundEffect("Assets/sounds/death.wav", 2, 0, 8);
@@ -179,11 +176,12 @@ void Game::ProcessInput()
 	}
 
 	//Used to exit the start screen and play flap noise when space is pressed
-	if (state[SDL_SCANCODE_SPACE] && !gameEnd)
-	{
-		//cout << SDL_GetTicks() - timeSpacePressed << endl;
 
-		if (SDL_GetTicks() - timeSpacePressed > 400) //Prevents holding down the space and flying like a rocket
+	if (state[SDL_SCANCODE_SPACE])
+	{
+		cout << SDL_GetTicks() - timeSpacePressed << endl;
+
+		if (SDL_GetTicks() - timeSpacePressed > 300) //Prevents holding down the space and flying like a rocket
 		{
 			timeSpacePressed = SDL_GetTicks();
 			gameStart = true;
@@ -192,7 +190,6 @@ void Game::ProcessInput()
 			player1->Jump();
 		}
 	}
-	
 
 	if (state[SDL_SCANCODE_R])
 	{
@@ -221,8 +218,6 @@ void Game::UpdateGame()
 
 	//Update Player
 	player1->UpdateActor(deltaTime);
-
-
 
 	//Detect collision between player and top pipes
 	for (auto& element : lvl->topObjects)
@@ -254,7 +249,7 @@ void Game::UpdateGame()
 
 
 	//Kills the player when they hit the ground
-	if (player1->getPositionY() >= 0.8 * SCREEN_Y)
+	if (player1->getPositionY() >= 879)
 	{
 		player1->isAlive = false;
 		gameEnd = true;
@@ -264,8 +259,8 @@ void Game::UpdateGame()
 	//Scrolling background
 	if (mSpeed != 0)
 	{
-		lvl->updatePosition(mSpeed+2.5); //Should be 3
-		mainBG->updatePosition(mSpeed+1); //Should be 2
+		lvl->updatePosition(mSpeed+1); //Should be 3
+		mainBG->updatePosition(mSpeed); //Should be 2
 	}
 	else
 	{
@@ -321,7 +316,7 @@ void Game::GenerateOutput()
 	}
 
 	//Draw text (not including splash screen text)
-	scoreText->updateText( "Score: "+ std::to_string(score));
+	scoreText->updateText( "Score: "+to_string(score));
 	for (auto element : mText)
 	{
 		element->drawText(mRenderer, theFont);
@@ -349,7 +344,7 @@ void Game::Shutdown()
 	SDL_Quit();
 }
 
-void Game::UnloadData() const
+void Game::UnloadData()
 {
 	for (auto& texts:mText)
 		delete texts;
@@ -374,7 +369,7 @@ void Game::restartGame()
 	if (score > highScore)
 	{
 		highScore = score;
-		hScoreText->updateText("Best : " + std::to_string(score));
+		hScoreText->updateText("Best : " + to_string(score));
 
 	}
 	score = 0;

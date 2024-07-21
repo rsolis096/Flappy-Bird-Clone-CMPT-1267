@@ -6,7 +6,10 @@
 #include "SDL/SDL_image.h"
 
 #include <vector>
+#include <string>
 
+#include <iostream>
+using namespace std;
 
 struct Vector2
 {
@@ -22,11 +25,9 @@ public:
 	void RunLoop();
 	void Shutdown();
 	void LoadData();
-	void UnloadData() const;
+	void UnloadData();
 	void restartGame();
 	static float deltaTime;
-	static int SCREEN_X;
-	static int SCREEN_Y;
 
 private:
 	void ProcessInput();
@@ -39,9 +40,9 @@ private:
 	bool hasScrolled;
 	bool deathSoundPlayed;
 
-	std::vector<struct SoundEffect*> mSoundEffects;
-	std::vector<class Text*> mText;
-	std::vector<class Text*> tempText;
+	vector<struct SoundEffect*> mSoundEffects;
+	vector<class Text*> mText;
+	vector<class Text*> tempText;
 
 	//Following text instances are program specific
 	struct Background* mainBG;

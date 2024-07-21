@@ -56,13 +56,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IntDir>$(SolutionDir)Build\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IntDir>$(SolutionDir)Build\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -99,7 +95,6 @@ xcopy "$(SolutionDir)libs\GLEW\win\x86\*.dll" "$(OutDir)" /i /s /y</Command>
       <AdditionalIncludeDirectories>$(SolutionDir)includes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
