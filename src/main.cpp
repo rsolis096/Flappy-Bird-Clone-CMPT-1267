@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Game.h"
 
 int main(int argc, char** argv)
@@ -15,7 +17,7 @@ int main(int argc, char** argv)
 	}
 	catch (std::runtime_error e)
 	{
-		cout << e.what() << endl;
+		std::cout << e.what() << std::endl;
 	}
 
 	return 0;
