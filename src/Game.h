@@ -1,9 +1,9 @@
 #pragma once
 
-#include <SDL/SDL.h>
-#include <SDL/SDL_ttf.h>
-#include <SDL/SDL_mixer.h>
-#include <SDL/SDL_image.h>
+#include <SDL2-2.30.5/SDL.h>
+#include <SDL2-2.30.5/SDL_ttf.h>
+#include <SDL2-2.30.5/SDL_image.h>
+#include <SDL2-2.30.5/SDL_mixer.h>
 
 #include <vector>
 

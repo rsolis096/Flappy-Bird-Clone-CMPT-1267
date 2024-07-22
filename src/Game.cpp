@@ -17,9 +17,9 @@ Game::Game()
 	index = 0;
 	deltaTime = 0;
 	secondCounter = 0;
-	mWindow=nullptr;
-	mRenderer=nullptr;
-	mIsRunning=true;
+	mWindow = nullptr;
+	mRenderer = nullptr;
+	mIsRunning = true;
 	mTicksCount = 0;
 	player1 = nullptr;
 	scoreText = nullptr;
@@ -45,24 +45,24 @@ Game::Game()
 bool Game::Initialize()
 {
 	// Initialize SDL
-	int sdlResult = SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
+	int sdlResult = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
 	if (sdlResult != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
 	}
-	
-	//Open Audio
+
+	// Open Audio
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 1, 2048);
 
 	// Create an SDL Window
 	mWindow = SDL_CreateWindow(
 		"Flappy Bird", // Window title
-		100,	// Top left x-coordinate of window
-		100,	// Top left y-coordinate of window
-		SCREEN_X,	// Width of window
-		SCREEN_Y,	// Height of window
-		0		// Flags (0 for no flags set)
+		100,		   // Top left x-coordinate of window
+		100,		   // Top left y-coordinate of window
+		SCREEN_X,	   // Width of window
+		SCREEN_Y,	   // Height of window
+		0			   // Flags (0 for no flags set)
 	);
 
 	if (!mWindow)
@@ -70,13 +70,12 @@ bool Game::Initialize()
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;
 	}
-	
+
 	//// Create SDL renderer
 	mRenderer = SDL_CreateRenderer(
 		mWindow, // Window to create renderer for
 		-1,		 // Usually -1
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-	);
+		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	if (!mRenderer)
 	{
@@ -101,7 +100,6 @@ bool Game::Initialize()
 	mTicksCount = SDL_GetTicks();
 
 	return true;
-
 }
 
 void Game::LoadData()
@@ -111,8 +109,8 @@ void Game::LoadData()
 
 	theFont = TTF_OpenFont("Assets/font/SuperMario256.ttf", 512);
 
-	scoreText = new Text(theFont, " ", 5, 20,SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
-	hScoreText = new Text(theFont, "Best: 0", SCREEN_X*0.75, 20, SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
+	scoreText = new Text(theFont, " ", 5, 20, SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
+	hScoreText = new Text(theFont, "Best: 0", SCREEN_X * 0.75, 20, SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
 	startTextHeader = new Text(theFont, "FLAPPY BIRD", SCREEN_X * 0.15, SCREEN_Y * 0.4, SCREEN_X * 0.7, SCREEN_Y * 0.1, 255, 255, 255);
 	startTextSub = new Text(theFont, "PRESS SPACE TO START", SCREEN_X * 0.05, SCREEN_Y * 0.5, SCREEN_X * 0.9, SCREEN_Y * 0.1, 255, 255, 255);
 	restartText = new Text(theFont, "Press R To Restart", SCREEN_X * 0.2, SCREEN_Y * 0.8, SCREEN_X * 0.6, SCREEN_Y * 0.05, 255, 255, 255);
@@ -141,7 +139,6 @@ void Game::LoadData()
 	mSoundEffects.push_back(collideSound);
 	mSoundEffects.push_back(flapSound);
 
-
 	mainBGMusic->playSound();
 }
 
@@ -163,14 +160,14 @@ void Game::ProcessInput()
 	{
 		switch (event.type)
 		{
-			// If we get an SDL_QUIT event, end loop
-			case SDL_QUIT:
-				mIsRunning = false;
-				break;
+		// If we get an SDL_QUIT event, end loop
+		case SDL_QUIT:
+			mIsRunning = false;
+			break;
 		}
 	}
 	// Get state of keyboard
-	const Uint8* state = SDL_GetKeyboardState(NULL);
+	const Uint8 *state = SDL_GetKeyboardState(NULL);
 
 	// If escape is pressed, also end loop
 	if (state[SDL_SCANCODE_ESCAPE])
@@ -178,12 +175,12 @@ void Game::ProcessInput()
 		mIsRunning = false;
 	}
 
-	//Used to exit the start screen and play flap noise when space is pressed
+	// Used to exit the start screen and play flap noise when space is pressed
 	if (state[SDL_SCANCODE_SPACE] && !gameEnd)
 	{
-		//cout << SDL_GetTicks() - timeSpacePressed << endl;
+		// cout << SDL_GetTicks() - timeSpacePressed << endl;
 
-		if (SDL_GetTicks() - timeSpacePressed > 400) //Prevents holding down the space and flying like a rocket
+		if (SDL_GetTicks() - timeSpacePressed > 400) // Prevents holding down the space and flying like a rocket
 		{
 			timeSpacePressed = SDL_GetTicks();
 			gameStart = true;
@@ -192,21 +189,19 @@ void Game::ProcessInput()
 			player1->Jump();
 		}
 	}
-	
 
 	if (state[SDL_SCANCODE_R])
 	{
 		if (gameEnd == true)
 			restart = true;
 	}
-	
-
 }
 
 void Game::UpdateGame()
 {
 	// Wait until 16ms has elapsed since last frame
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16)); //SDL DELAY hurt performance, this is best solution for 60fps lock
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
+		; // SDL DELAY hurt performance, this is best solution for 60fps lock
 
 	// Delta time is the difference in ticks from last frame (converted to seconds)
 	deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
@@ -219,60 +214,58 @@ void Game::UpdateGame()
 	// Update tick counts (for next frame)
 	mTicksCount = SDL_GetTicks();
 
-	//Update Player
+	// Update Player
 	player1->UpdateActor(deltaTime);
 
-
-
-	//Detect collision between player and top pipes
-	for (auto& element : lvl->topObjects)
-		if (SDL_HasIntersection(&element, &player1->getHitBox()))
+	// Detect collision between player and top pipes
+	SDL_Rect hitBox = player1->getHitBox();
+	for (auto &element : lvl->topObjects)
+		if (SDL_HasIntersection(&element, &hitBox))
 		{
 			player1->isAlive = false;
 			gameEnd = true;
 			mSpeed = 0;
 		}
 
-	//Detect collision between player and bottom pipes
-	for (auto& element : lvl->bottomObjects)
-		if (SDL_HasIntersection(&element, &player1->getHitBox()))
+	// Detect collision between player and bottom pipes
+	for (auto &element : lvl->bottomObjects)
+		if (SDL_HasIntersection(&element, &hitBox))
 		{
 			player1->isAlive = false;
 			gameEnd = true;
 			mSpeed = 0;
 		}
 
-	//Detect when a player passes in between pipes
-	for (auto& element : lvl->pointObject)
+	// Detect when a player passes in between pipes
+	for (auto &element : lvl->pointObject)
 	{
-		if (player1->getPositionX() >= static_cast<int> (element.x + element.w) && player1->getPositionX() < static_cast<int> (element.x + element.w + 5))
+		if (player1->getPositionX() >= static_cast<int>(element.x + element.w) && player1->getPositionX() < static_cast<int>(element.x + element.w + 5))
 		{
 			score++;
 			pointSound->playSound();
-		}			
+		}
 	}
 
-
-	//Kills the player when they hit the ground
+	// Kills the player when they hit the ground
 	if (player1->getPositionY() >= 0.8 * SCREEN_Y)
 	{
 		player1->isAlive = false;
 		gameEnd = true;
 		mSpeed = 0;
 	}
-		
-	//Scrolling background
+
+	// Scrolling background
 	if (mSpeed != 0)
 	{
-		lvl->updatePosition(mSpeed+2.5); //Should be 3
-		mainBG->updatePosition(mSpeed+1); //Should be 2
+		lvl->updatePosition(mSpeed + 2.5);	// Should be 3
+		mainBG->updatePosition(mSpeed + 1); // Should be 2
 	}
 	else
 	{
-		lvl->updatePosition(0); //Should be 3
-		mainBG->updatePosition(0); //Should be 2
+		lvl->updatePosition(0);	   // Should be 3
+		mainBG->updatePosition(0); // Should be 2
 	}
-	player1->flap(); //Makes the bird hover! NEAT. Uses the draw function
+	player1->flap(); // Makes the bird hover! NEAT. Uses the draw function
 
 	if (restart == true)
 		restartGame();
@@ -280,13 +273,13 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
-	//Draw Background
+	// Draw Background
 	SDL_RenderClear(mRenderer);
 	mainBG->drawBackground(mRenderer);
 
-	//Draw Level
+	// Draw Level
 	lvl->drawLevel(mRenderer);
-	
+
 	// Draw player, this timer allows to bird to flap its wings
 	secondCounter += deltaTime;
 	if (secondCounter >= 0.25)
@@ -297,7 +290,7 @@ void Game::GenerateOutput()
 		else
 			index = 0;
 	}
-	//Makes the player rotate forwards when they die
+	// Makes the player rotate forwards when they die
 	if (gameEnd == true && secondCounter >= 0.02 && player1->allowRotation == true)
 	{
 		player1->rotation += 1.5;
@@ -305,23 +298,22 @@ void Game::GenerateOutput()
 
 	player1->drawActor(mRenderer, index);
 
-	//Show Death Screen overtop everything
+	// Show Death Screen overtop everything
 	if (gameEnd == true)
 	{
 		deathScreen->drawFadeIn(mRenderer, deltaTime);
 		restartText->drawText(mRenderer, theFont);
 	}
 
-
-	//Display start menue over top everything
+	// Display start menue over top everything
 	if (gameStart == false)
 	{
 		startTextHeader->drawText(mRenderer, theFont);
 		startTextSub->drawText(mRenderer, theFont);
 	}
 
-	//Draw text (not including splash screen text)
-	scoreText->updateText( "Score: "+ std::to_string(score));
+	// Draw text (not including splash screen text)
+	scoreText->updateText("Score: " + std::to_string(score));
 	for (auto element : mText)
 	{
 		element->drawText(mRenderer, theFont);
@@ -351,11 +343,11 @@ void Game::Shutdown()
 
 void Game::UnloadData() const
 {
-	for (auto& texts:mText)
+	for (auto &texts : mText)
 		delete texts;
-	for (auto& texts : tempText)
+	for (auto &texts : tempText)
 		delete texts;
-	for (auto& sounds : mSoundEffects)
+	for (auto &sounds : mSoundEffects)
 		delete sounds;
 	delete player1;
 	delete mainBG;
@@ -375,7 +367,6 @@ void Game::restartGame()
 	{
 		highScore = score;
 		hScoreText->updateText("Best : " + std::to_string(score));
-
 	}
 	score = 0;
 	player1->restartGame();
