@@ -79,10 +79,11 @@ void Level::drawLevel(SDL_Renderer* mRenderer)
     pointObject[2].x = topObjects[2].x + topObjects[1].w / 2;
     pointObject[3].x = topObjects[3].x + topObjects[2].w / 2;
 
-    SDL_RenderDrawRect(mRenderer, &pointObject[0]);
-    SDL_RenderDrawRect(mRenderer, &pointObject[1]);
-    SDL_RenderDrawRect(mRenderer, &pointObject[2]);
-    SDL_RenderDrawRect(mRenderer, &pointObject[3]);
+    //Draw point hitboxes
+    //SDL_RenderDrawRect(mRenderer, &pointObject[0]);
+    //SDL_RenderDrawRect(mRenderer, &pointObject[1]);
+    //SDL_RenderDrawRect(mRenderer, &pointObject[2]);
+    //SDL_RenderDrawRect(mRenderer, &pointObject[3]);
 }
 
 

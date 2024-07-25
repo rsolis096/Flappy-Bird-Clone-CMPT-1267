@@ -218,7 +218,7 @@ void Game::UpdateGame()
 	player1->UpdateActor(deltaTime);
 
 	// Detect collision between player and top pipes
-	/*
+	
 	SDL_Rect hitBox = player1->getHitBox();
 	for (auto& element : lvl->topObjects)
 		if (SDL_HasIntersection(&element, &hitBox))
@@ -236,7 +236,7 @@ void Game::UpdateGame()
 			gameEnd = true;
 			mSpeed = 0;
 		}
-	*/
+	
 	// Detect when a player passes in between pipes
 	for (auto& element : lvl->pointObject)
 	{
