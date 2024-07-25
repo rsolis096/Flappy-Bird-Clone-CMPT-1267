@@ -12,8 +12,6 @@ Background::Background()
     bgSurface[1] = nullptr;
     BG1 = {0, 0, Game::SCREEN_X, Game::SCREEN_Y};
     BG2 = {Game::SCREEN_X, 0, Game::SCREEN_X, Game::SCREEN_Y};
-    startingBG1 = 0;
-    startingBG2 = Game::SCREEN_X;
 }
 
 void Background::loadBackground(SDL_Renderer *mRenderer, const int n)
@@ -69,6 +67,5 @@ void Background::restartGame()
 {
     BG1 = {0, 0, Game::SCREEN_X, Game::SCREEN_Y};
     BG2 = {Game::SCREEN_X, 0, Game::SCREEN_X, Game::SCREEN_Y};
-    startingBG1 = 0;
-    startingBG2 = Game::SCREEN_X;
+
 }

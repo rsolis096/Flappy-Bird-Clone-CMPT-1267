@@ -7,8 +7,8 @@ const float gravity = 0.45;
 Player::Player(const char* fN, float x, float y)
 {
 	//Position Related
-	actorPosition.x = 100.0f;
-	actorPosition.y = 500;
+	actorPosition.x = Game::SCREEN_X * 0.05;
+	actorPosition.y = Game::SCREEN_Y/2;
 	actorHeight = x;
 	actorWidth = y;
 	playerSprite = { static_cast<int>(actorPosition.x), static_cast<int>(actorPosition.y), static_cast<int>(actorWidth), static_cast<int>(actorHeight) };
@@ -37,7 +37,7 @@ void Player::Jump()
 	isFalling = true;
 	rotation -= 25; //Used for the climbing effect when flapping
 	if (fallVelocity > 0)
-		fallVelocity = -40.0f;
+		fallVelocity = -30.0f;
 	else
 		fallVelocity += -40.0f;
 }
@@ -54,8 +54,8 @@ void Player::UpdateActor(float deltaTime)
 		//Update position in terms of meters
 		actorPosition.y += fallVelocity * (Game::deltaTime) * 10.0f;
 
-		if (actorPosition.y > 850)
-			actorPosition.y = 850;
+		if (actorPosition.y > Game::SCREEN_Y * 0.88)
+			actorPosition.y = Game::SCREEN_Y * 0.88;
 
 		//Adjust fallVelocity based on impact of gravity
 		fallVelocity += 9.81f * Game::deltaTime * 10.0f;
@@ -72,7 +72,7 @@ void Player::UpdateActor(float deltaTime)
 	//Prevent player from falling through the floor
 	if (static_cast<int>(actorPosition.y + actorHeight / 2) >= 956)
 	{
-		actorPosition.y = 956 - actorHeight / 2;
+		actorPosition.y = Game::SCREEN_Y - actorHeight / 2;
 		isFalling = false;
 		allowRotation = false;
 	}
@@ -108,7 +108,7 @@ void Player::drawActor(SDL_Renderer* mRenderer, int index)
 
 	//Show hitbox for debugging
 	//SDL_RenderDrawRect(mRenderer, &hitBox);
-	SDL_RenderCopyEx(mRenderer, sprite[index], NULL, &playerSprite, rotation, NULL, SDL_FLIP_NONE);
+	SDL_RenderCopyEx(mRenderer, sprite[index], nullptr, &playerSprite, rotation, nullptr, SDL_FLIP_NONE);
 }
 
 void Player::loadTexture(SDL_Renderer* mRenderer)
@@ -177,8 +177,8 @@ SDL_Rect Player::getHitBox()
 
 void Player::restartGame()
 {
-	actorPosition.x = 100.0f;
-	actorPosition.y = 500;
+	actorPosition.x = Game::SCREEN_X * 0.05;
+	actorPosition.y = Game::SCREEN_Y / 2;
 	rotation = 0;
 	isAlive = true;
 	isFalling = false;

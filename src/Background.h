@@ -14,6 +14,4 @@ struct Background
 	void loadBackground(SDL_Renderer *, const int);
 	void updatePosition(const int);
 	void restartGame();
-	int startingBG1;
-	int startingBG2;
 };

@@ -1,50 +1,32 @@
-﻿  Background.cpp
-  Game.cpp
+﻿  Game.cpp
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
   (compiling source file 'src/Game.cpp')
   D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7):
   see declaration of 'SoundEffect'
   
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(112,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(106,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(106,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(111,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(111,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(112,86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(112,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(112,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,111): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,95): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,62): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,113): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(128,80): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,111): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,95): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,62): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,113): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(127,87): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(185,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(260,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Img.cpp
-  Level.cpp
-  main.cpp
-  Player.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(5,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(19,15): warning C4305: '=': truncation from 'double' to 'float'
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(150,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(155,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  SoundEffect.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'src/SoundEffect.cpp')
-  D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7):
-  see declaration of 'SoundEffect'
-  
-  Text.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(7,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(8,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(9,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(10,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-  Generating Code...
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(261,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(262,33): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
   Game.vcxproj -> D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\x64\Debug\Game.exe
   File not found - *.dll
   0 File(s) copied

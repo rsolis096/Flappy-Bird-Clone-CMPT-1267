@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\Downloads\SDL_FontCache.c" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Img.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\SDL_FontCache.h" />
     <ClInclude Include="src\Background.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Img.h" />

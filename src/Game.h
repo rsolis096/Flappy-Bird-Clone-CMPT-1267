@@ -27,6 +27,7 @@ public:
 	static int SCREEN_X;
 	static int SCREEN_Y;
 
+
 private:
 	void ProcessInput();
 	void UpdateGame();

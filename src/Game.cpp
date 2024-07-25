@@ -9,8 +9,8 @@
 float Game::deltaTime = 0.0f;
 float timeSpacePressed = 0.0f;
 
-int Game::SCREEN_Y = 960;
-int Game::SCREEN_X = 544;
+int Game::SCREEN_Y = 544;
+int Game::SCREEN_X = 960;
 
 Game::Game()
 {
@@ -22,7 +22,6 @@ Game::Game()
 	mIsRunning = true;
 	mTicksCount = 0;
 	player1 = nullptr;
-	scoreText = nullptr;
 	mainBG = nullptr;
 	hasScrolled = false;
 	scoreText = nullptr;
@@ -58,8 +57,8 @@ bool Game::Initialize()
 	// Create an SDL Window
 	mWindow = SDL_CreateWindow(
 		"Flappy Bird", // Window title
-		100,		   // Top left x-coordinate of window
-		100,		   // Top left y-coordinate of window
+		0,			   // Top left x-coordinate of window
+		25,	   // Top left y-coordinate of window
 		SCREEN_X,	   // Width of window
 		SCREEN_Y,	   // Height of window
 		0			   // Flags (0 for no flags set)
@@ -104,15 +103,15 @@ bool Game::Initialize()
 
 void Game::LoadData()
 {
-	player1 = new Player("Assets/textures/frame-1.png", 80, 80);
+	player1 = new Player("Assets/textures/frame-1.png", 0.08 * SCREEN_Y, 0.08 * SCREEN_Y);
 	player1->loadTexture(mRenderer);
 
 	theFont = TTF_OpenFont("Assets/font/SuperMario256.ttf", 512);
 
-	scoreText = new Text(theFont, " ", 5, 20, SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
-	hScoreText = new Text(theFont, "Best: 0", SCREEN_X * 0.75, 20, SCREEN_Y * 0.1, 0.05 * SCREEN_X, 255, 255, 255);
-	startTextHeader = new Text(theFont, "FLAPPY BIRD", SCREEN_X * 0.15, SCREEN_Y * 0.4, SCREEN_X * 0.7, SCREEN_Y * 0.1, 255, 255, 255);
-	startTextSub = new Text(theFont, "PRESS SPACE TO START", SCREEN_X * 0.05, SCREEN_Y * 0.5, SCREEN_X * 0.9, SCREEN_Y * 0.1, 255, 255, 255);
+	scoreText = new Text(theFont, " ", 5, 20, SCREEN_Y * 0.2, 0.05 * SCREEN_X, 255, 255, 255);
+	hScoreText = new Text(theFont, "Best: 0", SCREEN_X * 0.75, 20, SCREEN_Y * 0.2, 0.05 * SCREEN_X, 255, 255, 255);
+	startTextHeader = new Text(theFont, "FLAPPY BIRD", SCREEN_X * 0.35, SCREEN_Y * 0.4, SCREEN_X * 0.3, SCREEN_Y * 0.1, 255, 255, 255);
+	startTextSub = new Text(theFont, "PRESS SPACE TO START", SCREEN_X * 0.25, SCREEN_Y * 0.5, SCREEN_X * 0.5, SCREEN_Y * 0.1, 255, 255, 255);
 	restartText = new Text(theFont, "Press R To Restart", SCREEN_X * 0.2, SCREEN_Y * 0.8, SCREEN_X * 0.6, SCREEN_Y * 0.05, 255, 255, 255);
 	mText.emplace_back(scoreText);
 	mText.emplace_back(hScoreText);
@@ -125,13 +124,14 @@ void Game::LoadData()
 	mainBG->loadBackground(mRenderer, 1);
 
 	lvl = new Level(mRenderer);
-	deathScreen = new IMG("Assets/textures/death.png", 0, 400, SCREEN_X, SCREEN_Y * 0.30);
+	deathScreen = new IMG("Assets/textures/death.png", 0, SCREEN_Y/2, SCREEN_X, SCREEN_Y * 0.20);
 
-	pointSound = new SoundEffect("Assets/sounds/point.wav", 1, 0, 5);
-	deathSound = new SoundEffect("Assets/sounds/death.wav", 2, 0, 8);
-	mainBGMusic = new SoundEffect("Assets/sounds/music.wav", 3, -1, 3);
-	collideSound = new SoundEffect("Assets/sounds/collision.wav", 4, 0, 5);
-	flapSound = new SoundEffect("Assets/sounds/flap.wav", 5, 0, 5);
+	pointSound = new SoundEffect("Assets/sounds/point.wav", 1, 0, 15);
+	deathSound = new SoundEffect("Assets/sounds/death.wav", 2, 0, 18);
+	mainBGMusic = new SoundEffect("Assets/sounds/music.wav", 3, -1, 13);
+	collideSound = new SoundEffect("Assets/sounds/collision.wav", 4, 0, 15);
+	flapSound = new SoundEffect("Assets/sounds/flap.wav", 5, 0, 15);
+
 
 	mSoundEffects.push_back(pointSound);
 	mSoundEffects.push_back(deathSound);
@@ -160,14 +160,14 @@ void Game::ProcessInput()
 	{
 		switch (event.type)
 		{
-		// If we get an SDL_QUIT event, end loop
+			// If we get an SDL_QUIT event, end loop
 		case SDL_QUIT:
 			mIsRunning = false;
 			break;
 		}
 	}
 	// Get state of keyboard
-	const Uint8 *state = SDL_GetKeyboardState(NULL);
+	const Uint8* state = SDL_GetKeyboardState(NULL);
 
 	// If escape is pressed, also end loop
 	if (state[SDL_SCANCODE_ESCAPE])
@@ -180,7 +180,7 @@ void Game::ProcessInput()
 	{
 		// cout << SDL_GetTicks() - timeSpacePressed << endl;
 
-		if (SDL_GetTicks() - timeSpacePressed > 400) // Prevents holding down the space and flying like a rocket
+		if (SDL_GetTicks() - timeSpacePressed > 300) // Prevents holding down the space and flying like a rocket
 		{
 			timeSpacePressed = SDL_GetTicks();
 			gameStart = true;
@@ -218,8 +218,9 @@ void Game::UpdateGame()
 	player1->UpdateActor(deltaTime);
 
 	// Detect collision between player and top pipes
+	/*
 	SDL_Rect hitBox = player1->getHitBox();
-	for (auto &element : lvl->topObjects)
+	for (auto& element : lvl->topObjects)
 		if (SDL_HasIntersection(&element, &hitBox))
 		{
 			player1->isAlive = false;
@@ -228,16 +229,16 @@ void Game::UpdateGame()
 		}
 
 	// Detect collision between player and bottom pipes
-	for (auto &element : lvl->bottomObjects)
+	for (auto& element : lvl->bottomObjects)
 		if (SDL_HasIntersection(&element, &hitBox))
 		{
 			player1->isAlive = false;
 			gameEnd = true;
 			mSpeed = 0;
 		}
-
+	*/
 	// Detect when a player passes in between pipes
-	for (auto &element : lvl->pointObject)
+	for (auto& element : lvl->pointObject)
 	{
 		if (player1->getPositionX() >= static_cast<int>(element.x + element.w) && player1->getPositionX() < static_cast<int>(element.x + element.w + 5))
 		{
@@ -257,13 +258,13 @@ void Game::UpdateGame()
 	// Scrolling background
 	if (mSpeed != 0)
 	{
-		lvl->updatePosition(mSpeed + 2.5);	// Should be 3
-		mainBG->updatePosition(mSpeed + 1); // Should be 2
+		lvl->updatePosition(mSpeed + 1.5);	
+		mainBG->updatePosition(mSpeed + 0.5); 
 	}
 	else
 	{
-		lvl->updatePosition(0);	   // Should be 3
-		mainBG->updatePosition(0); // Should be 2
+		lvl->updatePosition(0);	   
+		mainBG->updatePosition(0); 
 	}
 	player1->flap(); // Makes the bird hover! NEAT. Uses the draw function
 
@@ -305,7 +306,7 @@ void Game::GenerateOutput()
 		restartText->drawText(mRenderer, theFont);
 	}
 
-	// Display start menue over top everything
+	// Display start menu over top everything
 	if (gameStart == false)
 	{
 		startTextHeader->drawText(mRenderer, theFont);
@@ -343,9 +344,9 @@ void Game::Shutdown()
 
 void Game::UnloadData() const
 {
-	for (auto &texts : mText)
+	for (auto& texts : mText)
 		delete texts;
-	for (auto &texts : tempText)
+	for (auto& texts : tempText)
 		delete texts;
 	for (auto &sounds : mSoundEffects)
 		delete sounds;

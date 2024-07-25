@@ -17,11 +17,9 @@ struct Level
 	std::vector<SDL_Rect> bottomObjects;
 	std::vector<SDL_Rect> pointObject;
 
-	std::vector<int> diff{-150, -100, -50, 50, 100, 150, -100, -150, -200};
-	int diffIndex;
-
 	void drawLevel(SDL_Renderer *);
 	void updatePosition(int);
 	void restartGame();
-	int getRandom(int, int);
+	int getRandom();
 };
+

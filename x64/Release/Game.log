@@ -1,52 +1,18 @@
-﻿  Background.cpp
-  Game.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'src/Game.cpp')
-  D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7):
-  see declaration of 'SoundEffect'
-  
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(112,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(112,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,74): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,53): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,111): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,95): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(114,62): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,117): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(115,68): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,113): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(116,65): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(128,80): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(185,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(260,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Img.cpp
-  Level.cpp
-  main.cpp
-  Player.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(5,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(19,15): warning C4305: '=': truncation from 'double' to 'float'
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(150,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(155,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-  SoundEffect.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'src/SoundEffect.cpp')
-  D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(5,7):
-  see declaration of 'SoundEffect'
-  
-  Text.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(7,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(8,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(9,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Text.cpp(10,17): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+﻿  Level.cpp
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244: '+=': conversion from '_Ty' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:         with
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:         [
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:             _Ty=float
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:         ]
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244: '+=': conversion from '_Ty' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:         with
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:         [
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:             _Ty=float
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:         ]
   Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 490 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  342 of 577 functions (59.3%) were compiled, the rest were copied from previous compilation.
+    87 functions were new in current compilation
+    37 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Game.vcxproj -> D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\x64\Release\Game.exe
   File not found - *.dll
