@@ -116,8 +116,8 @@ void Game::LoadData()
 	scoreText = new Text(20, 20, "Score:\t0\n");
 	hScoreText = new Text(24, 50, "Best: \t0\n");
 	startTextHeader = new Text(SCREEN_X * 0.35, SCREEN_Y * 0.6, "FLAPPY BIRD");
-	startTextSub = new Text(SCREEN_X * 0.15, SCREEN_Y * 0.7, "PRESS X or Touch TO START");
-	restartText = new Text(SCREEN_X * 0.15, SCREEN_Y * 0.6, "Press X or Touch To Restart");
+	startTextSub = new Text(SCREEN_X * 0.22, SCREEN_Y * 0.7, "PRESS Space TO START");
+	restartText = new Text(SCREEN_X * 0.25, SCREEN_Y * 0.6, "Press R To Restart");
 
 	font = FC_CreateFont();
 	FC_LoadFont(font, mRenderer, "Assets/font/SuperMario256.ttf", 24, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);

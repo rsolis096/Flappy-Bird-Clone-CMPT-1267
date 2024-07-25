@@ -1,5 +1,4 @@
-﻿  Background.cpp
-  Game.cpp
+﻿  Game.cpp
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(6,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
   (compiling source file 'src/Game.cpp')
   D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(6,7):
@@ -18,28 +17,8 @@ D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(133,65): warning C
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(191,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(262,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(263,33): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
-  Img.cpp
-  Level.cpp
-  Player.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(5,23): warning C4305: 'initializing': truncation from 'double' to 'float'
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(10,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(11,34): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(19,15): warning C4305: '=': truncation from 'double' to 'float'
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(58,37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(150,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(155,9): warning C4244: 'return': conversion from 'float' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(180,35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Player.cpp(181,35): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  SoundEffect.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(6,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
-  (compiling source file 'src/SoundEffect.cpp')
-  D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(6,7):
-  see declaration of 'SoundEffect'
-  
-  main.cpp
-  Generating Code...
   Game.vcxproj -> D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\x64\Debug\Game.exe
-  0 File(s) copied
   File not found - *.dll
+  0 File(s) copied
   D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\libs\GLEW\win\x86\glew32.dll
   1 File(s) copied
