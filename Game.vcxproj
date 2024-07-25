@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Downloads\SDL_FontCache.c" />
+    <ClCompile Include="includes\Font Cache\SDL_FontCache.c" />
     <ClCompile Include="src\Background.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Img.cpp" />
@@ -27,17 +27,14 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\SoundEffect.cpp" />
-    <ClCompile Include="src\Text.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Downloads\SDL_FontCache.h" />
     <ClInclude Include="src\Background.h" />
     <ClInclude Include="src\Game.h" />
     <ClInclude Include="src\Img.h" />
     <ClInclude Include="src\Level.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\SoundEffect.h" />
-    <ClInclude Include="src\Text.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{BC508D87-495F-4554-932D-DD68388B63CC}</ProjectGuid>

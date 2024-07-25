@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game.h"
+#include <SDL2-2.30.5/SDL_mixer.h>
 
 class SoundEffect
 {

@@ -10,7 +10,9 @@ int main(int argc, char **argv)
 	try
 	{
 		Game game;
+		printf("loading");
 		bool success = game.Initialize();
+		printf("done loading");
 		if (success)
 		{
 			game.RunLoop();

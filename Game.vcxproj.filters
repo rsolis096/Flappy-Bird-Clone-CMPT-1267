@@ -6,7 +6,7 @@
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
     <Filter Include="external">
-      <UniqueIdentifier>{91f98c51-504b-426e-8aff-6b76501b5fe2}</UniqueIdentifier>
+      <UniqueIdentifier>{baf73a04-7d93-40d4-9045-0334e1b44db4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -31,10 +31,7 @@
     <ClCompile Include="src\SoundEffect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Text.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Downloads\SDL_FontCache.c">
+    <ClCompile Include="includes\Font Cache\SDL_FontCache.c">
       <Filter>external</Filter>
     </ClCompile>
   </ItemGroup>
@@ -56,12 +53,6 @@
     </ClInclude>
     <ClInclude Include="src\SoundEffect.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Text.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Downloads\SDL_FontCache.h">
-      <Filter>external</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

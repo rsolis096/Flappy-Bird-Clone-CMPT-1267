@@ -1,16 +1,27 @@
 #include "Game.h"
 #include "Player.h"
 #include "Background.h"
-#include "Text.h"
 #include "Level.h"
 #include "Img.h"
+// #include "Text.h"
 #include "SoundEffect.h"
+
 
 float Game::deltaTime = 0.0f;
 float timeSpacePressed = 0.0f;
 
 int Game::SCREEN_Y = 544;
 int Game::SCREEN_X = 960;
+
+void Game::DrawText(const std::string& text, float x, float y)
+{
+	FC_Draw(font, mRenderer, x, y, text.c_str());
+}
+
+void Game::DrawTextScale(const std::string& text, float x, float y, FC_Scale scale)
+{
+	FC_DrawScale(font, mRenderer, x, y, scale, text.c_str());
+}
 
 Game::Game()
 {
@@ -24,9 +35,7 @@ Game::Game()
 	player1 = nullptr;
 	mainBG = nullptr;
 	hasScrolled = false;
-	scoreText = nullptr;
-	startTextHeader = nullptr;
-	startTextSub = nullptr;
+
 	gameStart = false;
 	gameEnd = false;
 	mSpeed = 0;
@@ -38,13 +47,12 @@ Game::Game()
 	collideSound = nullptr;
 	flapSound = 0;
 	restart = false;
-	restartText = nullptr;
 }
 
 bool Game::Initialize()
 {
 	// Initialize SDL
-	int sdlResult = SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
+	int sdlResult = SDL_Init(SDL_INIT_VIDEO);
 	if (sdlResult != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
@@ -52,16 +60,16 @@ bool Game::Initialize()
 	}
 
 	// Open Audio
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 1, 2048);
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 
 	// Create an SDL Window
 	mWindow = SDL_CreateWindow(
-		"Flappy Bird", // Window title
-		0,			   // Top left x-coordinate of window
-		25,	   // Top left y-coordinate of window
-		SCREEN_X,	   // Width of window
-		SCREEN_Y,	   // Height of window
-		0			   // Flags (0 for no flags set)
+		"Flappy Bird",			 // Window title
+		SDL_WINDOWPOS_UNDEFINED, // Top left x-coordinate of window
+		SDL_WINDOWPOS_UNDEFINED, // Top left y-coordinate of window
+		SCREEN_X,				 // Width of window
+		SCREEN_Y,				 // Height of window
+		SDL_WINDOW_SHOWN		 // Flags (0 for no flags set)
 	);
 
 	if (!mWindow)
@@ -74,7 +82,7 @@ bool Game::Initialize()
 	mRenderer = SDL_CreateRenderer(
 		mWindow, // Window to create renderer for
 		-1,		 // Usually -1
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+		0);
 
 	if (!mRenderer)
 	{
@@ -97,7 +105,6 @@ bool Game::Initialize()
 	LoadData();
 
 	mTicksCount = SDL_GetTicks();
-
 	return true;
 }
 
@@ -106,32 +113,30 @@ void Game::LoadData()
 	player1 = new Player("Assets/textures/frame-1.png", 0.08 * SCREEN_Y, 0.08 * SCREEN_Y);
 	player1->loadTexture(mRenderer);
 
-	theFont = TTF_OpenFont("Assets/font/SuperMario256.ttf", 512);
+	scoreText = new Text(20, 20, "Score:\t0\n");
+	hScoreText = new Text(24, 50, "Best: \t0\n");
+	startTextHeader = new Text(SCREEN_X * 0.35, SCREEN_Y * 0.6, "FLAPPY BIRD");
+	startTextSub = new Text(SCREEN_X * 0.15, SCREEN_Y * 0.7, "PRESS X or Touch TO START");
+	restartText = new Text(SCREEN_X * 0.15, SCREEN_Y * 0.6, "Press X or Touch To Restart");
 
-	scoreText = new Text(theFont, " ", 5, 20, SCREEN_Y * 0.2, 0.05 * SCREEN_X, 255, 255, 255);
-	hScoreText = new Text(theFont, "Best: 0", SCREEN_X * 0.75, 20, SCREEN_Y * 0.2, 0.05 * SCREEN_X, 255, 255, 255);
-	startTextHeader = new Text(theFont, "FLAPPY BIRD", SCREEN_X * 0.35, SCREEN_Y * 0.4, SCREEN_X * 0.3, SCREEN_Y * 0.1, 255, 255, 255);
-	startTextSub = new Text(theFont, "PRESS SPACE TO START", SCREEN_X * 0.25, SCREEN_Y * 0.5, SCREEN_X * 0.5, SCREEN_Y * 0.1, 255, 255, 255);
-	restartText = new Text(theFont, "Press R To Restart", SCREEN_X * 0.2, SCREEN_Y * 0.8, SCREEN_X * 0.6, SCREEN_Y * 0.05, 255, 255, 255);
+	font = FC_CreateFont();
+	FC_LoadFont(font, mRenderer, "Assets/font/SuperMario256.ttf", 24, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+
 	mText.emplace_back(scoreText);
 	mText.emplace_back(hScoreText);
-	tempText.emplace_back(startTextHeader);
-	tempText.emplace_back(startTextSub);
-	tempText.emplace_back(restartText);
 
 	mainBG = new Background;
 	mainBG->loadBackground(mRenderer, 0);
 	mainBG->loadBackground(mRenderer, 1);
 
 	lvl = new Level(mRenderer);
-	deathScreen = new IMG("Assets/textures/death.png", 0, SCREEN_Y/2, SCREEN_X, SCREEN_Y * 0.20);
-
-	pointSound = new SoundEffect("Assets/sounds/point.wav", 1, 0, 15);
-	deathSound = new SoundEffect("Assets/sounds/death.wav", 2, 0, 18);
-	mainBGMusic = new SoundEffect("Assets/sounds/music.wav", 3, -1, 13);
-	collideSound = new SoundEffect("Assets/sounds/collision.wav", 4, 0, 15);
-	flapSound = new SoundEffect("Assets/sounds/flap.wav", 5, 0, 15);
-
+	deathScreen = new IMG("Assets/textures/death.png", 0, SCREEN_Y * 0.35, SCREEN_X, SCREEN_Y * 0.20);
+	// Max Volume 128
+	pointSound = new SoundEffect("Assets/sounds/point.wav", 1, 0, 35);
+	deathSound = new SoundEffect("Assets/sounds/death.wav", 2, 0, 60);
+	mainBGMusic = new SoundEffect("Assets/sounds/music.wav", 3, -1, 60);
+	collideSound = new SoundEffect("Assets/sounds/collision.wav", 4, 0, 60);
+	flapSound = new SoundEffect("Assets/sounds/flap.wav", 5, 0, 128);
 
 	mSoundEffects.push_back(pointSound);
 	mSoundEffects.push_back(deathSound);
@@ -144,6 +149,7 @@ void Game::LoadData()
 
 void Game::RunLoop()
 {
+
 	while (mIsRunning)
 	{
 		ProcessInput();
@@ -200,8 +206,9 @@ void Game::ProcessInput()
 void Game::UpdateGame()
 {
 	// Wait until 16ms has elapsed since last frame
+	// SDL DELAY hurt performance, this is best solution for 60fps lock
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
-		; // SDL DELAY hurt performance, this is best solution for 60fps lock
+		;
 
 	// Delta time is the difference in ticks from last frame (converted to seconds)
 	deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
@@ -217,33 +224,27 @@ void Game::UpdateGame()
 	// Update Player
 	player1->UpdateActor(deltaTime);
 
-	// Detect collision between player and top pipes
-	
+	// Detect collision between player pipes
 	SDL_Rect hitBox = player1->getHitBox();
-	for (auto& element : lvl->topObjects)
-		if (SDL_HasIntersection(&element, &hitBox))
+	for (int i = 0; i < lvl->topObjects.size(); i++)
+	{
+		if (SDL_HasIntersection(&lvl->topObjects[i], &hitBox) || SDL_HasIntersection(&lvl->bottomObjects[i], &hitBox))
 		{
 			player1->isAlive = false;
 			gameEnd = true;
 			mSpeed = 0;
 		}
-
-	// Detect collision between player and bottom pipes
-	for (auto& element : lvl->bottomObjects)
-		if (SDL_HasIntersection(&element, &hitBox))
-		{
-			player1->isAlive = false;
-			gameEnd = true;
-			mSpeed = 0;
-		}
+	}
 	
+
 	// Detect when a player passes in between pipes
 	for (auto& element : lvl->pointObject)
 	{
-		if (player1->getPositionX() >= static_cast<int>(element.x + element.w) && player1->getPositionX() < static_cast<int>(element.x + element.w + 5))
+		if (player1->getPositionX() >= (element.x + element.w) && player1->getPositionX() < (element.x + element.w + 5))
 		{
 			score++;
 			pointSound->playSound();
+			scoreText->text = ("Score:\t" + std::to_string(score)+ "\n");
 		}
 	}
 
@@ -258,13 +259,13 @@ void Game::UpdateGame()
 	// Scrolling background
 	if (mSpeed != 0)
 	{
-		lvl->updatePosition(mSpeed + 1.5);	
-		mainBG->updatePosition(mSpeed + 0.5); 
+		lvl->updatePosition(mSpeed + 1.5);
+		mainBG->updatePosition(mSpeed + 0.5);
 	}
 	else
 	{
-		lvl->updatePosition(0);	   
-		mainBG->updatePosition(0); 
+		lvl->updatePosition(0);
+		mainBG->updatePosition(0);
 	}
 	player1->flap(); // Makes the bird hover! NEAT. Uses the draw function
 
@@ -281,53 +282,67 @@ void Game::GenerateOutput()
 	// Draw Level
 	lvl->drawLevel(mRenderer);
 
-	// Draw player, this timer allows to bird to flap its wings
+	// Handle Player Animation
+	HandlePlayerAnimation();
+
+	// Draw Player
+	player1->drawActor(mRenderer, index);
+
+	// Draw Overlays (Death Screen, Start Menu)
+	DrawOverlays();
+
+	// Draw Score and Text
+	for (const auto& element : mText)
+	{
+		DrawText(element->text, element->x, element->y);
+	}
+
+	// Play Death Sound if Necessary (stops other sounds)
+	HandleDeathSound();
+
+	// Swap Buffers
+	SDL_RenderPresent(mRenderer);
+}
+
+void Game::HandlePlayerAnimation()
+{
 	secondCounter += deltaTime;
 	if (secondCounter >= 0.25)
 	{
 		secondCounter = 0.0f;
-		if (index == 0)
-			index = 1;
-		else
-			index = 0;
+		index = (index == 0) ? 1 : 0;
 	}
-	// Makes the player rotate forwards when they die
-	if (gameEnd == true && secondCounter >= 0.02 && player1->allowRotation == true)
+	if (gameEnd && secondCounter >= 0.02 && player1->allowRotation)
 	{
 		player1->rotation += 1.5;
 	}
+}
 
-	player1->drawActor(mRenderer, index);
-
-	// Show Death Screen overtop everything
-	if (gameEnd == true)
+void Game::DrawOverlays()
+{
+	if (gameEnd)
 	{
 		deathScreen->drawFadeIn(mRenderer, deltaTime);
-		restartText->drawText(mRenderer, theFont);
+		//Show the restart game text
+		DrawTextScale(restartText->text, restartText->x, restartText->y, FC_Scale{ 1.5f, 1.5f });
 	}
-
-	// Display start menu over top everything
-	if (gameStart == false)
+	else if (!gameStart)
 	{
-		startTextHeader->drawText(mRenderer, theFont);
-		startTextSub->drawText(mRenderer, theFont);
+		//If the game hasn't started yet, draw the title and instructions
+		DrawTextScale(startTextHeader->text, startTextHeader->x, startTextHeader->y, FC_Scale{ 1.5f, 1.5f });
+		DrawTextScale(startTextSub->text, startTextSub->x, startTextSub->y, FC_Scale{ 1.5f, 1.5f });
 	}
+}
 
-	// Draw text (not including splash screen text)
-	scoreText->updateText("Score: " + std::to_string(score));
-	for (auto element : mText)
-	{
-		element->drawText(mRenderer, theFont);
-	}
-	if (deathSoundPlayed == false && gameEnd == true)
+void Game::HandleDeathSound()
+{
+	if (!deathSoundPlayed && gameEnd)
 	{
 		deathSound->playSound();
 		collideSound->playSound();
 		deathSoundPlayed = true;
 		mainBGMusic->stopSound();
 	}
-	// Swap front buffer and back buffer
-	SDL_RenderPresent(mRenderer);
 }
 
 void Game::Shutdown()
@@ -335,26 +350,28 @@ void Game::Shutdown()
 	UnloadData();
 	SDL_DestroyRenderer(mRenderer);
 	SDL_DestroyWindow(mWindow);
-	TTF_CloseFont(theFont);
 	TTF_Quit();
 	Mix_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
 
-void Game::UnloadData() const
+void Game::UnloadData()
 {
-	for (auto& texts : mText)
-		delete texts;
-	for (auto& texts : tempText)
-		delete texts;
-	for (auto &sounds : mSoundEffects)
+	for (auto& t : mText)
+		t = nullptr;
+
+	startTextHeader = nullptr;
+	startTextSub = nullptr;
+	restartText = nullptr;
+	for (auto& sounds : mSoundEffects)
 		delete sounds;
 	delete player1;
 	delete mainBG;
 	delete deathScreen;
 	delete lvl;
 }
+
 
 void Game::restartGame()
 {
@@ -367,7 +384,7 @@ void Game::restartGame()
 	if (score > highScore)
 	{
 		highScore = score;
-		hScoreText->updateText("Best : " + std::to_string(score));
+		hScoreText->text = ("Best: \t" + std::to_string(score) + "\n");
 	}
 	score = 0;
 	player1->restartGame();

@@ -22,3 +22,7 @@ protected:
 	SDL_Texture *outLineTexture;
 	std::string textureText;
 };
+
+
+
+
