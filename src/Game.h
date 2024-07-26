@@ -54,8 +54,7 @@ private:
 	void GenerateOutput();
 	void HandlePlayerAnimation();
 	void DrawOverlays();
-	void DrawText(const std::string& text, float x, float y);
-	void DrawTextScale(const std::string& text, float x, float y, FC_Scale);
+	void DrawText(const std::string& text, float x, float y, int type);
 	void HandleDeathSound();
 	SDL_Window* mWindow;
 	SDL_Renderer* mRenderer;
@@ -75,7 +74,8 @@ private:
 	class Player* player1;
 	struct Level* lvl;
 	struct IMG* deathScreen;
-	FC_Font* font;
+	FC_Font* font_small;
+	FC_Font* font_large;
 
 	float secondCounter;
 	bool startGame;

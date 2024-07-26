@@ -13,15 +13,15 @@ float timeSpacePressed = 0.0f;
 int Game::SCREEN_Y = 544;
 int Game::SCREEN_X = 960;
 
-void Game::DrawText(const std::string& text, float x, float y)
+void Game::DrawText(const std::string& text, float x, float y, int type)
 {
-	FC_Draw(font, mRenderer, x, y, text.c_str());
+	if (type == 0)
+		FC_Draw(font_small, mRenderer, x, y, text.c_str());
+	else
+		FC_Draw(font_large, mRenderer, x, y, text.c_str());
 }
 
-void Game::DrawTextScale(const std::string& text, float x, float y, FC_Scale scale)
-{
-	FC_DrawScale(font, mRenderer, x, y, scale, text.c_str());
-}
+
 
 Game::Game()
 {
@@ -119,8 +119,12 @@ void Game::LoadData()
 	startTextSub = new Text(SCREEN_X * 0.22, SCREEN_Y * 0.7, "PRESS Space TO START");
 	restartText = new Text(SCREEN_X * 0.25, SCREEN_Y * 0.6, "Press R To Restart");
 
-	font = FC_CreateFont();
-	FC_LoadFont(font, mRenderer, "Assets/font/SuperMario256.ttf", 24, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+	font_small = FC_CreateFont();
+	font_large = FC_CreateFont();
+
+	FC_LoadFont(font_small, mRenderer, "Assets/font/SuperMario256.ttf", 24, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+	FC_LoadFont(font_large, mRenderer, "Assets/font/SuperMario256.ttf", 36, FC_MakeColor(255, 255, 255, 255), TTF_STYLE_NORMAL);
+
 
 	mText.emplace_back(scoreText);
 	mText.emplace_back(hScoreText);
@@ -294,7 +298,7 @@ void Game::GenerateOutput()
 	// Draw Score and Text
 	for (const auto& element : mText)
 	{
-		DrawText(element->text, element->x, element->y);
+		DrawText(element->text, element->x, element->y, 0);
 	}
 
 	// Play Death Sound if Necessary (stops other sounds)
@@ -324,13 +328,13 @@ void Game::DrawOverlays()
 	{
 		deathScreen->drawFadeIn(mRenderer, deltaTime);
 		//Show the restart game text
-		DrawTextScale(restartText->text, restartText->x, restartText->y, FC_Scale{ 1.5f, 1.5f });
+		DrawText(restartText->text, restartText->x, restartText->y, 1);
 	}
 	else if (!gameStart)
 	{
 		//If the game hasn't started yet, draw the title and instructions
-		DrawTextScale(startTextHeader->text, startTextHeader->x, startTextHeader->y, FC_Scale{ 1.5f, 1.5f });
-		DrawTextScale(startTextSub->text, startTextSub->x, startTextSub->y, FC_Scale{ 1.5f, 1.5f });
+		DrawText(startTextHeader->text, startTextHeader->x, startTextHeader->y, 1);
+		DrawText(startTextSub->text, startTextSub->x, startTextSub->y, 1);
 	}
 }
 

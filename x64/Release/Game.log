@@ -1,21 +1,29 @@
-﻿  Level.cpp
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244: '+=': conversion from '_Ty' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:         with
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:         [
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:             _Ty=float
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(49,40): warning C4244:         ]
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244: '+=': conversion from '_Ty' to 'int', possible loss of data
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:         with
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:         [
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:             _Ty=float
-D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Level.cpp(65,40): warning C4244:         ]
+﻿  Game.cpp
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(6,7): warning C4099: 'SoundEffect': type name first seen using 'struct' now seen using 'class'
+  (compiling source file 'src/Game.cpp')
+  D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\SoundEffect.h(6,7):
+  see declaration of 'SoundEffect'
+  
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,76): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(113,59): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(118,55): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(118,38): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(119,52): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(119,35): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(120,51): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(120,34): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(137,92): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(137,65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(195,35): warning C4244: '=': conversion from 'Uint32' to 'float', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(266,30): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\src\Game.cpp(267,33): warning C4244: 'argument': conversion from 'double' to 'const int', possible loss of data
   Generating code
-  342 of 577 functions (59.3%) were compiled, the rest were copied from previous compilation.
-    87 functions were new in current compilation
-    37 functions had inline decision re-evaluated but remain unchanged
+  7 of 506 functions ( 1.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Game.vcxproj -> D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\x64\Release\Game.exe
-  File not found - *.dll
   0 File(s) copied
+  File not found - *.dll
   D:\Desktop\programs\Flappy-Bird-Clone-CMPT-1267-\libs\GLEW\win\x86\glew32.dll
   1 File(s) copied
